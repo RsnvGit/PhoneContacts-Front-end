@@ -1,0 +1,120 @@
+<div >  
+  <nav style="height:55px" class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom ">
+      <div class="container-fluid">
+        <a style="margin-left: 15px;"class="navbar-brand" >Blocked Contacts</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul style="margin-left: 9px;"class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                  <a class="nav-link" href="">All Contacts</a>
+                </li>
+            <li class="nav-item">
+              <a class="nav-link" href="igncontacts">Blocked Contacts</a>
+            </li>
+            
+          </ul>
+
+          
+          <div style="margin-top: 16px;" class="mb-3">
+            <input
+              placeholder="Search"
+              
+              class="form-control"
+              id="exampleInputEmail2"
+              
+              [(ngModel)]="filterText"
+            />
+            
+          </div>
+        </div>
+      </div>
+    </nav>
+</div>
+
+<div style="margin-left:20px;">
+   
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Telephone Number</th>
+          <th scope="col">More Info</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let value of values | ignoredFilter:filterText">
+          <td>{{ value.name }}</td>
+          <td>{{ value.lastName }}</td>
+          <td>{{ value.telNumber }}</td>
+          <td style="width: 15%;">
+            <div style="margin-right: 65px;">
+              <mat-expansion-panel hideToggle [class.mat-expansion-panel]="false">
+                <mat-expansion-panel-header style="height: 30px;" >
+                    <i class="bi bi-info-circle"></i>
+                  </mat-expansion-panel-header>
+                <p>email: {{ value.mailAdress }} <br />
+                  relationship: {{ value.relationship }}</p>
+              </mat-expansion-panel></div>
+          </td>
+  
+          <td>
+            <div class="btn-group mb-3">
+              <button type="button" class="btn btn-outline-success btn-sm" (click)="unignoreContact(value.id)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"></path>
+              <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"></path>
+              </svg>
+                <span class="visually-hidden">Button</span>
+              </button>
+
+              <ng-template #content2 let-c="close" let-d="dismiss">
+                <div >
+                  <h1 style="text-align:center" class="modal-title" id="modal-basic-title">Contact Deletion</h1>
+                  
+                </div>
+               
+                <div class="container">
+                  <br>
+                 
+                  <h3 >Do you really want to delete?</h3>
+                </div>
+                <div class="modal-footer">
+                  <button  type="submit" class="btn btn-outline-danger" (click)="d()">Cancel</button>
+                  <button  type="submit" class="btn btn-outline-dark" (click)="c('Save click');removeContact(value.id)">Delete</button>
+                </div>
+              </ng-template>
+                <button type="button" class="btn btn-outline-danger btn-sm" (click)="open(content2)">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-trash"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+                  ></path>
+                  <path
+                    fill-rule="evenodd"
+                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </td>
+  
+        </tr>
+      </tbody>
+    </table>
+  
+  
+  
+    
+  </div>
+  
